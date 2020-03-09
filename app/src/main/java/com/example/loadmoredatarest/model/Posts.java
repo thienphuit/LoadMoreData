@@ -1,4 +1,4 @@
-package com.example.loadmoredatarest;
+package com.example.loadmoredatarest.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -16,6 +16,9 @@ public class Posts {
     @SerializedName("body")
     @Expose
     private String body;
+   /* public Posts (String userid){
+        this.userId = userid;
+    }*/
 
     public String getUserId() {
         return userId;
@@ -34,5 +37,21 @@ public class Posts {
 
     public String getBody() {
         return body;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }

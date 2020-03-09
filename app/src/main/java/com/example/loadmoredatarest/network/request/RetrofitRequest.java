@@ -1,4 +1,4 @@
-package com.example.loadmoredatarest.network;
+package com.example.loadmoredatarest.network.request;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

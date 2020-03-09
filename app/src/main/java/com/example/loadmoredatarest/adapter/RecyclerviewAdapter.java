@@ -1,14 +1,19 @@
-package com.example.loadmoredatarest;
+package com.example.loadmoredatarest.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.loadmoredatarest.R;
+import com.example.loadmoredatarest.model.Posts;
 
 import java.util.List;
 
@@ -16,9 +21,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static final String TAG = RecyclerviewAdapter.class.getSimpleName();
     private final int VIEW_TYPE_ITEM = 0;
     private final int VIEW_TYPE_LOADING = 1;
     private List<Posts> mItemList;
+    private OnItemClickListener mOnItemClickListener;
+    public static interface OnItemClickListener{
+        void onItemClick(View view,int rowPosition);
+    }
+
+    public void setmOnItemClickListener(OnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
     public RecyclerviewAdapter(Context context, List<Posts> mItemList){
         this.mItemList = mItemList;
     }
@@ -54,7 +69,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mItemList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.content)
         TextView mTextViewContent;
         @BindView(R.id.itemTv)
@@ -66,7 +81,16 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         ItemViewHolder(View view) {
             super(view);
             ButterKnife.bind(this,view);
+            view.setOnClickListener(this);
            // tvItem = itemView.findViewById(R.id.itemTv);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(mOnItemClickListener!=null){
+                mOnItemClickListener.onItemClick(view,getAdapterPosition());
+            }
+            Log.d(TAG,getAdapterPosition()+"");
         }
     }
 

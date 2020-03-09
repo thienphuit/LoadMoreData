@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.loadmoredatarest.ArticleRepository.ArticleRepository;
+import com.example.loadmoredatarest.reposiroty.article.ArticleRepository;
 import com.example.loadmoredatarest.reponse.ArticleResponse;
 
 public class ArticleViewModel extends AndroidViewModel {

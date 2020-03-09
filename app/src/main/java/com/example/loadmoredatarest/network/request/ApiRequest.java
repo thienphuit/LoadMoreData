@@ -1,4 +1,4 @@
-package com.example.loadmoredatarest.network;
+package com.example.loadmoredatarest.network.request;
 
 import com.example.loadmoredatarest.reponse.ArticleResponse;
 

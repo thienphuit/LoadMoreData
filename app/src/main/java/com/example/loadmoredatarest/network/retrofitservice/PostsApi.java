@@ -1,4 +1,6 @@
-package com.example.loadmoredatarest;
+package com.example.loadmoredatarest.network.retrofitservice;
+
+import com.example.loadmoredatarest.model.Posts;
 
 import java.util.List;
 

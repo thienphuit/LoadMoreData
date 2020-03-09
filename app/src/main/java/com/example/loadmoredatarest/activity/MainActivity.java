@@ -1,8 +1,7 @@
-package com.example.loadmoredatarest;
+package com.example.loadmoredatarest.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.loadmoredatarest.view_model.ObjectViewModel;
+import com.example.loadmoredatarest.R;
+import com.example.loadmoredatarest.adapter.RecyclerviewAdapter;
+import com.example.loadmoredatarest.model.Posts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Posts> rowsArrayList = new ArrayList<>();
    // private RecyclerView recyclerView;
     private boolean isLoading = false;
+    ObjectViewModel viewModel;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.btnNext)
     Button mBtnNext;
+    @BindView(R.id.changeName)
+    TextView mTextViewChangeName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +46,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
        // recyclerView = findViewById(R.id.recyclerView);
-        ObjectViewModel viewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
+         viewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
         viewModel.init();
-        viewModel.getNewsRepository().observe(this, posts -> {
-           // List<Posts> newsArticles = posts;
+        viewModel.getMutableLiveData().observe(this,posts -> {
             rowsArrayList.addAll(posts);
             newsAdapter.notifyDataSetChanged();
         });
+        /*viewModel.getNewsRepository().observe(this, posts -> {
+           // List<Posts> newsArticles = posts;
+            rowsArrayList.addAll(posts);
+            newsAdapter.notifyDataSetChanged();
+        });*/
         setupRecyclerView();
         mBtnNext.setOnClickListener(view -> {
-            Intent intent = new Intent(this,SecondActivity.class);
+            Intent intent = new Intent(this, SecondActivity.class);
             startActivity(intent);
         });
        // populateData();
@@ -59,6 +73,22 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(newsAdapter);
            // rvHeadline.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setNestedScrollingEnabled(true);
+            newsAdapter.setmOnItemClickListener(new RecyclerviewAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int rowPosition) {
+                    String name = "i am developer";
+                  //  viewModel.getNewsRepository().getValue()
+                  //  ArrayList<Posts> vitri1 = new ArrayList<>();
+                 //   Posts posts = new Posts();
+                  //  posts.setId("001");
+                  //  posts.setBody("hinh anh moi");
+                   // posts.setTitle("Thien Phu");
+                    //rowsArrayList.set(rowPosition,posts);
+
+                   // viewModel.getMutableLiveData().setValue(rowsArrayList);
+                    mTextViewChangeName.setText(rowsArrayList.get(rowPosition).getTitle());
+                }
+            });
         } else {
             newsAdapter.notifyDataSetChanged();
         }

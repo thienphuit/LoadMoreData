@@ -1,4 +1,4 @@
-package com.example.loadmoredatarest;
+package com.example.loadmoredatarest.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.example.loadmoredatarest.R;
 import com.example.loadmoredatarest.adapter.MovieArticleAdapter;
 import com.example.loadmoredatarest.model.Article;
 import com.example.loadmoredatarest.view_model.ArticleViewModel;

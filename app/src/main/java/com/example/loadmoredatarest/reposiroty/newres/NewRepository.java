@@ -1,8 +1,10 @@
-package com.example.loadmoredatarest;
-
-import android.util.Log;
+package com.example.loadmoredatarest.reposiroty.newres;
 
 import androidx.lifecycle.MutableLiveData;
+
+import com.example.loadmoredatarest.model.Posts;
+import com.example.loadmoredatarest.network.retrofitservice.PostsApi;
+import com.example.loadmoredatarest.network.retrofitservice.RetrofitService;
 
 import java.util.List;
 

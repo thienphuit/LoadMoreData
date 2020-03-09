@@ -1,12 +1,12 @@
-package com.example.loadmoredatarest.ArticleRepository;
+package com.example.loadmoredatarest.reposiroty.article;
 
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.loadmoredatarest.network.ApiRequest;
-import com.example.loadmoredatarest.network.RetrofitRequest;
+import com.example.loadmoredatarest.network.request.ApiRequest;
+import com.example.loadmoredatarest.network.request.RetrofitRequest;
 import com.example.loadmoredatarest.reponse.ArticleResponse;
 
 import retrofit2.Call;
