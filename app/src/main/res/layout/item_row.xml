@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:background="@color/colorChoose"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            android:text="Member Id"
+            android:id="@+id/memberId"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/itemTv"
+            android:text="Item X"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/titleName"
+            android:text="Tieu De"
+            android:layout_below="@+id/memberId"
+            android:layout_margin="16dp"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/content"
+            android:layout_marginTop="16dp"
+            android:textColor="#FFFFFF"
+            android:layout_below="@id/titleName"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
