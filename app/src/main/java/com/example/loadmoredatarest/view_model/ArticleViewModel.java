@@ -20,4 +20,6 @@ public class ArticleViewModel extends AndroidViewModel {
     public LiveData<ArticleResponse> getArticleResponseLiveData() {
         return articleResponseLiveData;
     }
+    public void setDetailArticle(ArticleResponse detailArticle){
+    }
 }

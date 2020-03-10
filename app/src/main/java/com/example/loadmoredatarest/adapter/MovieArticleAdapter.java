@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.loadmoredatarest.R;
 import com.example.loadmoredatarest.model.Article;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -22,9 +23,14 @@ import butterknife.ButterKnife;
 public class MovieArticleAdapter extends RecyclerView.Adapter<MovieArticleAdapter.ViewHolder> {
     private Context context;
     ArrayList<Article> articleArrayList;
-    public MovieArticleAdapter(Context context, ArrayList<Article> articleArrayList) {
+    private final   ClickListener clickListener;
+    public interface ClickListener{
+        void onPositionClicked(Article article);
+    }
+    public MovieArticleAdapter(Context context, ArrayList<Article> articleArrayList,ClickListener clickListener) {
         this.context = context;
         this.articleArrayList = articleArrayList;
+        this.clickListener = clickListener;
     }
     @NonNull
     @Override
@@ -49,7 +55,9 @@ public class MovieArticleAdapter extends RecyclerView.Adapter<MovieArticleAdapte
         return articleArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        //using WeakReference eliminate a potential memory leak.
+        WeakReference<ClickListener> weakReference;
         @BindView(R.id.imgViewCover)
         ImageView imgViewCover;
         @BindView(R.id.tvTitle)
@@ -61,6 +69,13 @@ public class MovieArticleAdapter extends RecyclerView.Adapter<MovieArticleAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            weakReference = new WeakReference<>(clickListener);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            weakReference.get().onPositionClicked(articleArrayList.get(getAdapterPosition()));
         }
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -66,7 +67,12 @@ public class SecondActivity extends AppCompatActivity {
         my_recycler_view.setHasFixedSize(true);
 
         // adapter
-        adapter = new MovieArticleAdapter(SecondActivity.this, articleArrayList);
+        adapter = new MovieArticleAdapter(SecondActivity.this, articleArrayList,article -> {
+            //handle click item recycler view
+            Intent intent = new Intent(this,ThreeActivity.class);
+            intent.putExtra("object",article);
+            startActivity(intent);
+        });
         my_recycler_view.setAdapter(adapter);
 
         // View Model
