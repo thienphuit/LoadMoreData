@@ -2,6 +2,7 @@ package com.example.loadmoredatarest.view_model;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 
 import com.example.loadmoredatarest.model.Posts;
@@ -11,7 +12,11 @@ import java.util.List;
 
 public class ObjectViewModel extends ViewModel {
     private MutableLiveData<List<Posts>> mutableLiveData;
+   // private SavedStateHandle mState;
     private NewRepository newRepository;
+    /*public ObjectViewModel(SavedStateHandle mState){
+        this.mState = mState;
+    }*/
     public  void init(){
         if(mutableLiveData!=null){
             return;
@@ -25,6 +30,7 @@ public class ObjectViewModel extends ViewModel {
     public MutableLiveData<List<Posts>> getMutableLiveData(){
         return  mutableLiveData;
     }
+
     private void setInput(List<Posts> input){
         mutableLiveData.setValue(input);
     }

@@ -35,7 +35,7 @@ public class NewRepository {
 
             @Override
             public void onFailure(Call<List<Posts>> call, Throwable t) {
-
+                newData.setValue(null);
             }
         });
         return newData;

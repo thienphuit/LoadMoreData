@@ -2,7 +2,12 @@ package com.example.loadmoredatarest.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,12 +23,15 @@ import com.example.loadmoredatarest.view_model.ObjectViewModel;
 import com.example.loadmoredatarest.R;
 import com.example.loadmoredatarest.adapter.RecyclerviewAdapter;
 import com.example.loadmoredatarest.model.Posts;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static androidx.navigation.Navigation.findNavController;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerviewAdapter newsAdapter;
@@ -38,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnNext;
     @BindView(R.id.changeName)
     TextView mTextViewChangeName;
+    @BindView(R.id.toolbar)
+    Toolbar mToolBar;
+    @BindView(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.navigationView)
+    NavigationView navigationView;
 
 
     @Override
@@ -45,27 +59,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setSupportActionBar(mToolBar);
+        setupNavigation();
+        //Navigation navController = findViewController(R.id.mainNavFragment)
        // recyclerView = findViewById(R.id.recyclerView);
-         viewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
-        viewModel.init();
-        viewModel.getMutableLiveData().observe(this,posts -> {
+        viewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
+      viewModel.init();
+      /*  viewModel.getMutableLiveData().observe(this,posts -> {
             rowsArrayList.addAll(posts);
             newsAdapter.notifyDataSetChanged();
-        });
+        });*/
         /*viewModel.getNewsRepository().observe(this, posts -> {
            // List<Posts> newsArticles = posts;
             rowsArrayList.addAll(posts);
             newsAdapter.notifyDataSetChanged();
         });*/
-        setupRecyclerView();
-        mBtnNext.setOnClickListener(view -> {
+       // setupRecyclerView();
+      /*  mBtnNext.setOnClickListener(view -> {
             Intent intent = new Intent(this, SecondActivity.class);
             startActivity(intent);
-        });
+        });*/
        // populateData();
       //  initAdapter();
        // initScrollListener();
     }
+
+    private void setupNavigation() {
+       // setSupportActionBar();
+        NavController navController =Navigation.findNavController(this,R.id.mainNavFragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
+        NavigationUI.setupWithNavController(navigationView,navController);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(
+                Navigation.findNavController(this, R.id.mainNavFragment), drawerLayout);
+    }
+
     private void setupRecyclerView() {
         if (newsAdapter == null) {
             newsAdapter = new RecyclerviewAdapter(MainActivity.this, rowsArrayList);
