@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         setupNavigation();
         //Navigation navController = findViewController(R.id.mainNavFragment)
        // recyclerView = findViewById(R.id.recyclerView);
-        viewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
-      viewModel.init();
+      //  viewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
+     // viewModel.init();
       /*  viewModel.getMutableLiveData().observe(this,posts -> {
             rowsArrayList.addAll(posts);
             newsAdapter.notifyDataSetChanged();
